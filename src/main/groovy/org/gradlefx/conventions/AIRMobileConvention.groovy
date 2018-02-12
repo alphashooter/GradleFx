@@ -139,6 +139,8 @@ class AIRMobileConvention  {
      */
     private int listenPort
 
+    private ArrayList<String> additionalAdtOptions
+
     public AIRMobileConvention(Project project) {
         target = 'apk'
         simulatorTarget = 'apk'
@@ -277,5 +279,13 @@ class AIRMobileConvention  {
 
     void setListenPort(int listenPort) {
         this.listenPort = listenPort
+    }
+
+    List<String> getAdditionalAdtOptions() {
+        return additionalAdtOptions
+    }
+
+    void setAdditionalAdtOptions(List<String> additionalAdtOptions) {
+        this.additionalAdtOptions = new ArrayList<>(additionalAdtOptions)
     }
 }
