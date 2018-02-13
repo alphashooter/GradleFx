@@ -48,12 +48,6 @@ class BaseAirMobilePackage extends AdtTask implements TemplateUtil {
         addArg CompilerOption.TARGET.optionName
         addArg target
 
-        if (flexConvention.airMobile.additionalAdtOptions) {
-            flexConvention.airMobile.additionalAdtOptions.each {
-                addArg it
-            }
-        }
-
         if(flexConvention.airMobile.connectHost) {
             addArg CompilerOption.CONNECT.optionName
             addArg flexConvention.airMobile.connectHost
@@ -92,6 +86,12 @@ class BaseAirMobilePackage extends AdtTask implements TemplateUtil {
         if(flexConvention.air.tsa) {
             addArgs CompilerOption.TSA,
                     flexConvention.air.tsa
+        }
+
+        if (flexConvention.airMobile.additionalAdtOptions) {
+            flexConvention.airMobile.additionalAdtOptions.each {
+                addArg it
+            }
         }
 
         addArgs outputPath
