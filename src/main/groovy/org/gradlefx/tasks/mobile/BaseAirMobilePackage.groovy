@@ -45,6 +45,13 @@ class BaseAirMobilePackage extends AdtTask implements TemplateUtil {
     @TaskAction
     def launch() {
         addArg CompilerOption.PACKAGE.optionName
+
+        if (flexConvention.airMobile.additionalAdtOptions) {
+            flexConvention.airMobile.additionalAdtOptions.each {
+                addArg it
+            }
+        }
+
         addArg CompilerOption.TARGET.optionName
         addArg target
 
@@ -86,12 +93,6 @@ class BaseAirMobilePackage extends AdtTask implements TemplateUtil {
         if(flexConvention.air.tsa) {
             addArgs CompilerOption.TSA,
                     flexConvention.air.tsa
-        }
-
-        if (flexConvention.airMobile.additionalAdtOptions) {
-            flexConvention.airMobile.additionalAdtOptions.each {
-                addArg it
-            }
         }
 
         addArgs outputPath
