@@ -33,6 +33,9 @@ def isReleaseBuild
 def sonatypeRepositoryUrl
 
 //set build variables based on build type (release, continuous integration, development)
+if(hasProperty("suffix")) {
+    version += "-" + getProperty("suffix")
+}
 if(hasProperty("release")) {
     isReleaseBuild = true
     sonatypeRepositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
@@ -92,7 +95,9 @@ if(isReleaseBuild) {
 uploadArchives {
     repositories {
         if (isDevBuild) {
-            mavenLocal()
+            mavenDeployer {
+                repository(url: mavenLocal().url)
+            }
         }
         else {
             mavenDeployer {
